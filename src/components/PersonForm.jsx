@@ -2,15 +2,18 @@ import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { ALL_PERSONS, CREATE_PERSON } from '../queries';
 
-
-export default function PersonForm() {
+export default function PersonForm({ setError }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [ { query: ALL_PERSONS }]
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => {
+      const messages = error.graphQLErrors.map((e) => e.message).join('\n');
+      setError(messages);
+    },
   });
   const submit = (event) => {
     event.preventDefault();
@@ -55,7 +58,7 @@ export default function PersonForm() {
             onChange={({ target }) => setCity(target.value)}
           />
         </div>
-        <button type='submit'>add!</button>
+        <button type="submit">add!</button>
       </form>
     </div>
   );
