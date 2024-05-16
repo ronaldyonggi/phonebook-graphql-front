@@ -1,12 +1,18 @@
 import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { EDIT_NUMBER } from '../queries';
+import { ALL_PERSONS, EDIT_NUMBER } from '../queries';
 
 export default function PhoneForm({ setError }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
-  const [changeNumber, result] = useMutation(EDIT_NUMBER);
+  const [changeNumber, { data, loading, error }] = useMutation(EDIT_NUMBER, {
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => {
+      const messages = error.graphQLErrors.map((e) => e.message).join('\n');
+      setError(messages);
+    },
+  });
 
   const submit = (event) => {
     event.preventDefault();
@@ -18,10 +24,10 @@ export default function PhoneForm({ setError }) {
   };
 
   useEffect(() => {
-    if (result.data && result.data.editNumber === null) {
+    if (data && data.editNumber === null) {
       setError('person not found');
     }
-  }, [result.data]);
+  }, [data]);
 
   return (
     <div>
