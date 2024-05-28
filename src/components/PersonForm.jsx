@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { ALL_PERSONS, CREATE_PERSON } from '../queries';
+import { updateCache } from '../App';
 
 export default function PersonForm({ setError }) {
   const [name, setName] = useState('');
@@ -13,13 +14,14 @@ export default function PersonForm({ setError }) {
       const messages = error.graphQLErrors.map((e) => e.message).join('\n');
       setError(messages);
     },
-    update: ( cache, response ) => {
-      cache.updateQuery({ query: ALL_PERSONS}, ({ allPersons }) => {
-        return {
-          allPersons: allPersons.concat(response.data.addPerson)
-        }
-      })
-    }
+    update: (cache, response) => {
+      // cache.updateQuery({ query: ALL_PERSONS}, ({ allPersons }) => {
+      //   return {
+      //     allPersons: allPersons.concat(response.data.addPerson)
+      //   }
+      // })
+      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson);
+    },
   });
   const submit = (event) => {
     event.preventDefault();
