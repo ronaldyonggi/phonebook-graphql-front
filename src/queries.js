@@ -76,3 +76,13 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const PERSON_ADDED = gql`
+  #graphql
+  subscription {
+    personAdded {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+`
