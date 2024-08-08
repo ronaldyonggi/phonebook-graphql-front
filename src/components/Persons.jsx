@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import Person from './Person';
-import { FIND_PERSON } from '../queries';
-
+import { FIND_PERSON } from '../graphql/queries';
 
 export default function Persons({ persons }) {
   const [nameToSearch, setNameToSearch] = useState(null);

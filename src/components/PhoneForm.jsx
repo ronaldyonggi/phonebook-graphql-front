@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { ALL_PERSONS, EDIT_NUMBER } from '../queries';
+import { EDIT_NUMBER } from '../graphql/mutations';
+import { ALL_PERSONS } from '../graphql/queries';
 
 export default function PhoneForm({ setError }) {
   const [name, setName] = useState('');
@@ -47,7 +48,7 @@ export default function PhoneForm({ setError }) {
             onChange={({ target }) => setPhone(target.value)}
           />
         </div>
-        <button type="submit">Change number</button>
+        <button type='submit'>Change number</button>
       </form>
     </div>
   );

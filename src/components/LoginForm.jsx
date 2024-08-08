@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { LOGIN } from '../queries';
+import { LOGIN } from '../graphql/mutations';
 
 export default function LoginForm({ setError, setToken }) {
   const [username, setUsername] = useState('');
@@ -38,7 +38,7 @@ export default function LoginForm({ setError, setToken }) {
         <div>
           password
           <input
-            type="password"
+            type='password'
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />

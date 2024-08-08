@@ -2,10 +2,11 @@ import { useApolloClient, useQuery, useSubscription } from '@apollo/client';
 import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
 import Notify from './components/Notify';
-import { ALL_PERSONS, PERSON_ADDED } from './queries';
 import { useState } from 'react';
 import PhoneForm from './components/PhoneForm';
 import LoginForm from './components/LoginForm';
+import { ALL_PERSONS } from './graphql/queries';
+import { PERSON_ADDED } from './graphql/subscriptions';
 
 // Function that takes care of manipulating cache
 export const updateCache = (cache, query, addedPerson) => {

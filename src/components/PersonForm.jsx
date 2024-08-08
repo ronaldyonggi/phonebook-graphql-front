@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
-import { ALL_PERSONS, CREATE_PERSON } from '../queries';
 import { updateCache } from '../App';
+import { CREATE_PERSON } from '../graphql/mutations';
+import { ALL_PERSONS } from '../graphql/queries';
 
 export default function PersonForm({ setError }) {
   const [name, setName] = useState('');
@@ -43,7 +44,7 @@ export default function PersonForm({ setError }) {
 
   return (
     <div>
-      <h2>Create new</h2>
+      <h2>Create new person</h2>
       <form onSubmit={submit}>
         <div>
           name{' '}
@@ -73,7 +74,7 @@ export default function PersonForm({ setError }) {
             onChange={({ target }) => setCity(target.value)}
           />
         </div>
-        <button type="submit">add!</button>
+        <button type='submit'>Add person</button>
       </form>
     </div>
   );
