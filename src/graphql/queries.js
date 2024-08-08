@@ -10,3 +10,18 @@ export const FIND_PERSON = gql`
   }
   ${PERSON_DETAILS}
 `;
+
+export const ALL_PERSONS = gql`
+  #graphql
+  query {
+    allPersons {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
+  }
+`;
