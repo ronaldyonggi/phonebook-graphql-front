@@ -30,9 +30,7 @@ const App = () => {
   const [token, setToken] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const result = useQuery(ALL_PERSONS, {
-    // pollInterval: 2000
-  });
+  const result = useQuery(ALL_PERSONS);
   const client = useApolloClient();
 
   useSubscription(PERSON_ADDED, {
